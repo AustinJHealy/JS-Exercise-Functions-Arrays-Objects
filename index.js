@@ -192,11 +192,19 @@ function getCarInfoById(inventory, car_id) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * sortCarInventory returns an inventory that is sorted by car_model, ascending [A-Z].
 */
-function sortCarInventory(inventory){
-  
-  const model = inventory.car_model;
-  return model.sort();
-}
+function sortCarInventory(inventory) {
+ 
+  return inventory.sort((a, b)  => {
+    if (a.car_model>b.car_model){
+      return 1;
+    } else if (a.car_model===b.car_model){
+      return 0;
+    } else if(a.car_model<b.car_model){
+      return -1;
+    }
+  })
+}         
+
  
 
 /**
@@ -251,7 +259,7 @@ function getOlderCars(inventory, max) {
 function getGermanCars(inventory) {
   const german = [];
   for (let i=0; i < inventory.length; i++) {
-  if (inventory[i].car_make === "Audi" || "Mercedes-Benz" || "Volkswagen" || "BMW") {
+  if (inventory[i].car_make === "Audi" || inventory[i].car_make ==="Mercedes-Benz" || inventory[i].car_make==="Volkswagen" ||inventory[i].car_make=== "BMW") {
     german.push(inventory[i]);
     } 
   } return german;
